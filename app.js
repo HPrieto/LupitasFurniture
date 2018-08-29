@@ -1,50 +1,18 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-var nodemailer = require('nodemailer');
 
-var transporter = nodemailer.createTransport({
-	service: 'gmail',
-	auth: {
-		user: 'duskayame@gmail.com',
-		pass: 'somepass'
-	}
-});
+// routes
+var indexRouter = require('./routes/index');
 
-console.log("Directory: " + path.join(__dirname, '/'));
+// Set path
 app.use(express.static(path.join(__dirname, '/')));
+
+// Set View Engine
 app.set('view engine', 'hjs');
 
-app.get('/', function (req, res, next) {
-	res.render('index', { title: 'Express' });
-});
+// Set Routes
+app.use('/', indexRouter);
 
-app.get('/emailrequest', function (req, res, next) {
-	if (typeof req === 'undefined') {
-		return
-	}
-
-	var email = req.query.email;
-
-	if (typeof email === 'undefined') {
-		return
-	}
-
-	var mailOptions = {
-		from: 'duskayame@gmail.com',
-		to: email,
-		subject: 'Lupita\'s Furniture',
-		text: 'That was easy!'
-	}
-
-	transporter.sendMail(mailOptions, function (error, info) {
-		if (error) {
-			console.log(error);
-		} else {
-			console.log("Email send: " + info.response);
-		}
-	});
-
-});
-
+// Begin server
 app.listen(3000, () => console.log('Listening to Port: 3000'));

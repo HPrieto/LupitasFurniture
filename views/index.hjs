@@ -70,7 +70,7 @@
 Lupita's Furniture es una empresa dedicada al diseño, remodelación e instalación de gabinetes para cocina, baño y otras áreas en su hogar. Nuestros profesionales cuentan con una amplia experiencia en la industria, lo que contribuye a que nuestro trabajo sea de alta calidad. También le ofrecemos una gran variedad de muebles para el hogar en diferentes diseños y colores. ¡Visite nuestra sala de exhibición!<a href="http://startbootstrap.com/template-overviews/grayscale/"></a></p>
           </div>
         </div>
-        <img src="img/ipad.png" class="img-fluid" alt="">
+        <img src="img/kitchen7.jpg" class="img-fluid" alt="">
       </div>
     </section>
 
@@ -141,7 +141,7 @@ Lupita's Furniture es una empresa dedicada al diseño, remodelación e instalaci
 
             <form class="form-inline d-flex">
               <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address...">
-              <button type="submit" class="btn btn-primary mx-auto" onclick="sendEmail();">Subscribe</button>
+              <button class="btn btn-primary mx-auto" onclick="sendEmail();">Subscribe</button>
             </form>
 
           </div>
