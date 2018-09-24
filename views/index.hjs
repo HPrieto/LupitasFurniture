@@ -189,7 +189,7 @@ Lupita's Furniture es una empresa dedicada al diseño, remodelación e instalaci
                 <i class="fas fa-mobile-alt text-primary mb-2"></i>
                 <h4 class="text-uppercase m-0">Phone</h4>
                 <hr class="my-4">
-                <div class="small text-black-50">(909) 907-9955</div>
+                <a class="small text-black-50" href="tel:+1-909-907-9955">(909) 907-9955</a>
               </div>
             </div>
           </div>
