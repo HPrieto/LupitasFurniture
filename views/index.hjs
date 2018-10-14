@@ -177,7 +177,7 @@ Lupita's Furniture es una empresa dedicada al diseño, remodelación e instalaci
                 <h4 class="text-uppercase m-0">Email</h4>
                 <hr class="my-4">
                 <div class="small text-black-50">
-                  <a>lupita@gmail.com</a>
+                  <a href="mailto:lupita@gmail.com?subject=Interesado en muebles">lupita@gmail.com</a>
                 </div>
               </div>
             </div>
