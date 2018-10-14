@@ -144,8 +144,9 @@ Lupita's Furniture es una empresa dedicada al diseño, remodelación e instalaci
             <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
 
             <form class="form-inline d-flex">
-              <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address...">
-              <button class="btn btn-primary mx-auto" onclick="sendEmail();">Subscribe</button>
+              <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address">
+              <input type="tel" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputPhone" placeholder="Enter Phone Number">
+              <button class="btn btn-primary mx-auto" onclick="sendEmail();">Contact Me</button>
             </form>
 
           </div>
@@ -226,12 +227,18 @@ Lupita's Furniture es una empresa dedicada al diseño, remodelación e instalaci
 
     <script>
       function sendEmail() {
+        console.log("Root: " + window.location.origin);
         var emailInput = document.getElementById('inputEmail');
+        var phoneInput = document.getElementById('inputPhone');
         var email = emailInput.value;
+        var phone = phoneInput.value;
         $.ajax({
           type: 'GET',
-          url: 'http://localhost:3000/emailrequest',
-          data: {email: email},
+          url: window.location.origin + '/emailrequest',
+          data: {
+            email: email,
+            phone: phone
+          },
           contentType: 'application/json',
           success: function (response) {
             console.log("Reponse: " + JSON.stringify(response));
