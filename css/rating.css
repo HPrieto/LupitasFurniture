@@ -1,0 +1,56 @@
+#rating h1 {
+	font-weight: 500;
+	padding: 50px 0;
+}
+
+#rating .container {
+	padding-bottom: 50px;
+}
+
+.user-rating {
+	padding-bottom: 25px;
+}
+
+.user-rating h5 {
+	font-weight: 600;
+	font-size: 0.95;
+	line-height: 1.70px;
+	padding-bottom: 2.5px;
+}
+
+.user-rating h6 {
+	line-height: 1.5em;
+	font-size: 0.93em;
+	padding-bottom: 5px;
+}
+
+.user-rating p {
+	font-size: 1.05em;
+	line-height: 1.3em;
+}
+
+#rating button {
+	border: none;
+	background-color: transparent;
+	color: #64a19d;
+	font-weight: bold;
+	padding-left: 0px;
+	font-size: 1.09em;
+}
+
+#rating button:hover {
+	cursor: pointer;
+}
+
+.zero {
+	padding: 0;
+	margin: 0;
+}
+
+#rating span {
+	color: lightgray;
+}
+
+#rating span .checked {
+	color: #64a19d!important;
+}

@@ -13,6 +13,7 @@ var transporter = nodemailer.createTransport({
 
 router.get('/', function (req, res, next) {
 	res.render('index', { title: 'Express' });
+	// res.render('rating_modal');
 });
 
 router.get('/emailrequest', function (req, res, next) {
@@ -20,6 +21,7 @@ router.get('/emailrequest', function (req, res, next) {
 		return
 	}
 
+	// Email and Password input by user
 	var email = req.query.email;
 	var phone = req.query.phone;
 
@@ -27,10 +29,13 @@ router.get('/emailrequest', function (req, res, next) {
 		return
 	}
 
+	// Current Time Formatted
 	var currentTime = new Date();
 	var timeString = currentTime.toLocaleString('en-US');
 
-	var message = "Email: ";
+	// Email message body
+	var message = "";
+	message += "Email: ";
 	message += email;
 	message += "\n";
 	message += "Phone: ";
@@ -44,8 +49,6 @@ router.get('/emailrequest', function (req, res, next) {
 		subject: 'Lupita\'s Furniture ' + timeString,
 		text: message
 	}
-
-	console.log(mailOptions);
 
 	transporter.sendMail(mailOptions, function (error, info) {
 		if (error) {
