@@ -51,6 +51,6 @@
 	color: lightgray;
 }
 
-#rating span .checked {
+#rating .checked {
 	color: #64a19d!important;
 }

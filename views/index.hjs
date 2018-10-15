@@ -148,18 +148,28 @@ Lupita's Furniture es una empresa dedicada al diseño, remodelación e instalaci
 
           <div class="user-rating col-lg-6 col-md-6 col-sm-12">
             <!-- Username Header -->
-            <div class="col-lg-6 col-md-6 zero">
-              <h5>Heriberto</h5>
-              <h6>8 Days Ago</h6>
-            </div>
+            <h5>Heriberto</h5>
+            <h6>8 Days Ago</h6>
             <!-- User Star Rating -->
-            <div class="col-lg-6 col-md-6 zero">
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-            </div>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <!-- User Comment Section -->
+            <p>Great spot. Treehouse itself is magical, the grounds are peaceful, host kind, and location to Firenze and local restaurants convenient.</p>
+          </div>
+
+          <div class="user-rating col-lg-6 col-md-6 col-sm-12">
+            <!-- Username Header -->
+            <h5>Nancy</h5>
+            <h6>1 Day Ago</h6>
+            <!-- User Star Rating -->
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
             <!-- User Comment Section -->
             <p>Great spot. Treehouse itself is magical, the grounds are peaceful, host kind, and location to Firenze and local restaurants convenient.</p>
           </div>
