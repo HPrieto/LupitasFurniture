@@ -1,6 +1,18 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var firebase = require('firebase');
+
+// Initialize Fireabse
+var firebaseConfig = {
+    apiKey: "AIzaSyAcVkAlPudoOqXwchD_aOu2mhXV_H-mRqY",
+    authDomain: "lupitasfurniture-f583c.firebaseapp.com",
+    databaseURL: "https://lupitasfurniture-f583c.firebaseio.com",
+    projectId: "lupitasfurniture-f583c",
+    storageBucket: "lupitasfurniture-f583c.appspot.com",
+    messagingSenderId: "75776435304"
+};
+firebase.initializeApp(firebaseConfig);
 
 // routes
 var indexRouter = require('./routes/index');

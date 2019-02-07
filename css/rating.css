@@ -16,7 +16,6 @@
 
 #rating h1 {
 	font-weight: 500;
-	padding: 75px 0;
 }
 
 #rating .container {
@@ -96,4 +95,24 @@
 	margin-top: 20px;
 	font-size: 1.05em;
 	line-height: 1.3em;
+}
+
+#add-review-button {
+	background-color: #64a19d;
+	color: white;
+	/*
+	position: absolute;
+  	right: 75%;
+  	top: 50%;
+  	-webkit-transform: translate(-50%, -50%);
+  	transform: translate(-50%, -50%);*/
+}
+
+#add-review-star-rating span {
+	font-size: 2em;
+	width: 40px;
+}
+
+#add-review-star-rating span:hover {
+	cursor: pointer;
 }

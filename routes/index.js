@@ -5,16 +5,6 @@ var masterEmail = 'lupitasfurniturewebsite@gmail.com';
 var firebase = require('firebase');
 var path = require('path');
 
-var firebaseConfig = {
-    apiKey: "AIzaSyAcVkAlPudoOqXwchD_aOu2mhXV_H-mRqY",
-    authDomain: "lupitasfurniture-f583c.firebaseapp.com",
-    databaseURL: "https://lupitasfurniture-f583c.firebaseio.com",
-    projectId: "lupitasfurniture-f583c",
-    storageBucket: "lupitasfurniture-f583c.appspot.com",
-    messagingSenderId: "75776435304"
-};
-firebase.initializeApp(firebaseConfig);
-
 var transporter = nodemailer.createTransport({
 	service: 'gmail',
 	auth: {
@@ -27,8 +17,8 @@ router.get('/', function (req, res, next) {
 	res.render('index', { title: 'Express' });
 });
 
-router.get('/reviews', function (req, res, next) {
-	res.render('reviews_modal');
+router.get('/get-reviews', function (req, res, next) {  
+	var reviewsRef = firebase.dateabase().ref('reviews');
 });
 
 router.post('/ratingsubmit', function (req, res, next) {
