@@ -1,249 +1,259 @@
 var REVIEWS = [
-        {
-          name: "Heriberto",
-          timeStamp: "Jan 5, 2019",
-          rating: 4,
-          comment: 'Great spot. Treehouse itself is magical, the grounds are peaceful, host kind, and location to Firenze and local restaurants convenient.'
-        },
-        {
-          name: "Nancy Molina",
-          timeStamp: "Jan 2, 2019",
-          rating: 5,
-          comment: 'Great spot. Treehouse itself is magical, the grounds are peaceful, host kind, and location to Firenze and local restaurants convenient.'
-        },
-        {
-          name: "Karina",
-          timeStamp: "Jan 2, 2019",
-          rating: 5,
-          comment: 'Great spot. Treehouse itself is magical, the grounds are peaceful, host kind, and location to Firenze and local restaurants convenient.'
-        }
-      ];
+  {
+    name: "Heriberto",
+    timeStamp: "Jan 5, 2019",
+    rating: 4,
+    comment: 'Great spot. Treehouse itself is magical, the grounds are peaceful, host kind, and location to Firenze and local restaurants convenient.'
+  },
+  {
+    name: "Nancy Molina",
+    timeStamp: "Jan 2, 2019",
+    rating: 5,
+    comment: 'Great spot. Treehouse itself is magical, the grounds are peaceful, host kind, and location to Firenze and local restaurants convenient.'
+  },
+  {
+    name: "Karina",
+    timeStamp: "Jan 2, 2019",
+    rating: 5,
+    comment: 'Great spot. Treehouse itself is magical, the grounds are peaceful, host kind, and location to Firenze and local restaurants convenient.'
+  }
+];
 
-      $(document).ready(function () {
-        getReviews(function (error, reviews) {
-          if (error !== null) {
-            console.log("There was an error.");
-            return;
-          }
-          setReviews(reviews);
-          setModalReviews(reviews);
-        });
-      });
+$(document).ready(function () {
+  getReviews(function (error, reviews) {
+    if (error !== null) {
+      console.log("There was an error.");
+      return;
+    }
+    setReviews(reviews);
+    setModalReviews(reviews);
+  });
+});
 
-      function getReviews(completionHandler) {
-        completionHandler(null, REVIEWS);
-      }
+function getReviews(completionHandler) {
+  //completionHandler(null, REVIEWS);
 
-      /*  
-      
-      <div class="user-rating col-lg-6 col-md-6 col-sm-12">
-        <!-- Username Header -->
-        <h5>Nancy</h5>
-        <h6>1 Day Ago</h6>
-        <!-- User Star Rating -->
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <!-- User Comment Section -->
-        <p>Great spot. Treehouse itself is magical, the grounds are peaceful, host kind, and location to Firenze and local restaurants convenient.</p>
-      </div>
-      
-      */
-      function setReviews(reviews) {
-        var ratingSection = document.getElementById('rating-container-section');
-        ratingSection.innerHTML = '';
+  $.ajax({
+    url: 'get-reviews',
+    type: 'GET',
+    dataType: 'json',
+    success: function (res) {
+      completionHandler(null, res);
+    },
+    error: function (res, error) {
+    }
+  });
+}
 
-        var nReviews = reviews.length < 2 ? reviews.length : 2;
+/*  
 
-        for (var i = 0; i < nReviews; i++) {
-          var review = reviews[i];
-          var reviewContainer = createReviewContainer(review);
-          ratingSection.appendChild(reviewContainer);
-        }
-      }
+<div class="user-rating col-lg-6 col-md-6 col-sm-12">
+  <!-- Username Header -->
+  <h5>Nancy</h5>
+  <h6>1 Day Ago</h6>
+  <!-- User Star Rating -->
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <!-- User Comment Section -->
+  <p>Great spot. Treehouse itself is magical, the grounds are peaceful, host kind, and location to Firenze and local restaurants convenient.</p>
+</div>
 
-      function createReviewContainer(review) {
-        var name = review.name;
-        var timeStamp = review.timeStamp;
-        var rating = review.rating;
-        var comment = review.comment;
+*/
+function setReviews(reviews) {
+  var ratingSection = document.getElementById('rating-container-section');
+  ratingSection.innerHTML = '';
 
-        var containerDiv = document.createElement('DIV');
-        containerDiv.setAttribute('class', 'user-rating col-lg-6 col-md-6 col-sm-12');
+  var nReviews = reviews.length < 2 ? reviews.length : 2;
 
-        var nameHeader = document.createElement('H5');
-        nameHeader.innerHTML = name;
+  for (var i = 0; i < nReviews; i++) {
+    var review = reviews[i];
+    var reviewContainer = createReviewContainer(review);
+    ratingSection.appendChild(reviewContainer);
+  }
+}
 
-        var stars = createStarRating(rating);
+function createReviewContainer(review) {
+  var name = review.name;
+  var timeStamp = review.created;
+  var rating = review.rating;
+  var comment = review.review;
 
-        var commentP = document.createElement('P');
-        commentP.innerHTML = comment;
+  var containerDiv = document.createElement('DIV');
+  containerDiv.setAttribute('class', 'user-rating col-lg-6 col-md-6 col-sm-12');
 
-        containerDiv.appendChild(nameHeader);
+  var nameHeader = document.createElement('H5');
+  nameHeader.innerHTML = name;
 
-        for (var s = 0; s < stars.length; s++) {
-          var star = stars[s];
-          containerDiv.appendChild(star);
-        }
+  var stars = createStarRating(rating);
 
-        containerDiv.appendChild(commentP);
+  var commentP = document.createElement('P');
+  commentP.innerHTML = comment;
 
-        return containerDiv;
-      }
+  containerDiv.appendChild(nameHeader);
 
-      function createStarRating(rating) {
-        var stars = [];
-        var maxStars = 5;
+  for (var s = 0; s < stars.length; s++) {
+    var star = stars[s];
+    containerDiv.appendChild(star);
+  }
 
-        // Create Checked Stars
-        for (var checkedIndex = 0; checkedIndex < rating; checkedIndex++) {
-          var checkedStar = document.createElement('SPAN');
-          checkedStar.setAttribute('class', 'fa fa-star checked');
-          stars.push(checkedStar);
-        }
+  containerDiv.appendChild(commentP);
 
-        // Create Unchecked Stars
-        for (var uncheckedIndex = rating; uncheckedIndex < maxStars; uncheckedIndex++) {
-          var uncheckedStar = document.createElement('SPAN');
-          uncheckedStar.setAttribute('class', 'fa fa-star');
-          stars.push(uncheckedStar);
-        }
-        return stars;
-      }
+  return containerDiv;
+}
 
-      function setModalReviews(reviews) {
-        var nReviews = reviews.length;
+function createStarRating(rating) {
+  var stars = [];
+  var maxStars = 5;
 
-        var modal = document.getElementById('reviews-modal');
-        var modalBody = modal.getElementsByClassName('modal-body')[0];
-        modalBody.innerHTML = '';
+  // Create Checked Stars
+  for (var checkedIndex = 0; checkedIndex < rating; checkedIndex++) {
+    var checkedStar = document.createElement('SPAN');
+    checkedStar.setAttribute('class', 'fa fa-star checked');
+    stars.push(checkedStar);
+  }
 
-        // Set title for button that displays modal
-        setReviewsCount(nReviews);
+  // Create Unchecked Stars
+  for (var uncheckedIndex = rating; uncheckedIndex < maxStars; uncheckedIndex++) {
+    var uncheckedStar = document.createElement('SPAN');
+    uncheckedStar.setAttribute('class', 'fa fa-star');
+    stars.push(uncheckedStar);
+  }
+  return stars;
+}
 
-        for (var i = 0; i < nReviews; i++) {
-          console.log("rating.");
-          var review = reviews[i];
-          var ratingContainer = createModalRatingContainer(review);
+function setModalReviews(reviews) {
+  var nReviews = reviews.length;
 
-          if (i === nReviews - 1) {
-            ratingContainer.style.borderBottom = 'none';
-          }
+  var modal = document.getElementById('reviews-modal');
+  var modalBody = modal.getElementsByClassName('modal-body')[0];
+  modalBody.innerHTML = '';
 
-          modalBody.appendChild(ratingContainer);
-        }
-        
-      }
+  // Set title for button that displays modal
+  setReviewsCount(nReviews);
 
-      function createModalRatingContainer(review) {
-        var name = review.name;
-        var timeStamp = review.timeStamp;
-        var rating = review.rating;
-        var comment = review.comment;
+  for (var i = 0; i < nReviews; i++) {
+    console.log("rating.");
+    var review = reviews[i];
+    var ratingContainer = createModalRatingContainer(review);
 
-        var view = document.createElement('DIV');
-        view.setAttribute('class', 'row rating-container');
+    if (i === nReviews - 1) {
+      ratingContainer.style.borderBottom = 'none';
+    }
 
-        var nameTitle = document.createElement('H5');
-        nameTitle.innerHTML = name;
+    modalBody.appendChild(ratingContainer);
+  }
+  
+}
 
-        var dateSpan = document.createElement('SPAN');
-        dateSpan.innerHTML = timeStamp;
+function createModalRatingContainer(review) {
+  var name = review.name;
+  var timeStamp = review.created;
+  var rating = review.rating;
+  var comment = review.review;
 
-        nameTitle.appendChild(dateSpan);
+  var view = document.createElement('DIV');
+  view.setAttribute('class', 'row rating-container');
 
-        var nameDiv = document.createElement('DIV');
-        nameDiv.setAttribute('class', 'col-sm-12 col-md-12 col-lg-12');
-        nameDiv.appendChild(nameTitle);
+  var nameTitle = document.createElement('H5');
+  nameTitle.innerHTML = name;
 
-        var commentPar = document.createElement('P');
-        commentPar.innerHTML = comment;
+  var dateSpan = document.createElement('SPAN');
+  dateSpan.innerHTML = timeStamp;
 
-        var commentDiv = document.createElement('DIV');
-        commentDiv.setAttribute('class', 'col-sm-12 col-md-12 col-lg-12');
-        commentDiv.appendChild(commentPar);
-        
-        var starRatings = createModalStarRating(rating);
-        
-        view.appendChild(nameDiv);
-        view.appendChild(starRatings);
-        view.appendChild(commentDiv);
+  nameTitle.appendChild(dateSpan);
 
-        return view;
-      }
+  var nameDiv = document.createElement('DIV');
+  nameDiv.setAttribute('class', 'col-sm-12 col-md-12 col-lg-12');
+  nameDiv.appendChild(nameTitle);
 
-      /*  
+  var commentPar = document.createElement('P');
+  commentPar.innerHTML = comment;
 
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
+  var commentDiv = document.createElement('DIV');
+  commentDiv.setAttribute('class', 'col-sm-12 col-md-12 col-lg-12');
+  commentDiv.appendChild(commentPar);
+  
+  var starRatings = createModalStarRating(rating);
+  
+  view.appendChild(nameDiv);
+  view.appendChild(starRatings);
+  view.appendChild(commentDiv);
 
-      */
-      function createModalStarRating(rating) {
-        var ratingDiv = document.createElement('DIV');
-        ratingDiv.setAttribute('class', 'col-sm-12 col-md-12 col-lg-12');
-        var maxStars = 5;
+  return view;
+}
 
-        // Create Checked Stars
-        for (var checkedIndex = 0; checkedIndex < rating; checkedIndex++) {
-          var checkedStar = document.createElement('SPAN');
-          checkedStar.setAttribute('class', 'fa fa-star checked');
-          ratingDiv.appendChild(checkedStar);
-        }
+/*  
 
-        // Create Unchecked Stars
-        for (var uncheckedIndex = rating; uncheckedIndex < maxStars; uncheckedIndex++) {
-          var uncheckedStar = document.createElement('SPAN');
-          uncheckedStar.setAttribute('class', 'fa fa-star');
-          ratingDiv.appendChild(uncheckedStar);
-        }
-        return ratingDiv;
-      }
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star"></span>
 
-      function setReviewsCount(n) {
-        var btn = document.getElementById('reviews-display-btn');
-        if (n === 0) {
-          btn.innerHTML = "No Reviews."
-          return;
-        }
-        btn.innerHTML = 'Read all ' + n + ' reviews';
-      }
+*/
+function createModalStarRating(rating) {
+  var ratingDiv = document.createElement('DIV');
+  ratingDiv.setAttribute('class', 'col-sm-12 col-md-12 col-lg-12');
+  var maxStars = 5;
 
-      function displayAllReviews() {
-        $('#reviews-modal').modal();
-        $.ajax({
-          type: 'GET',
-          url: window.location.origin + '/reviews',
-          success: function (response) {
-          },
-          error: function (response) {
+  // Create Checked Stars
+  for (var checkedIndex = 0; checkedIndex < rating; checkedIndex++) {
+    var checkedStar = document.createElement('SPAN');
+    checkedStar.setAttribute('class', 'fa fa-star checked');
+    ratingDiv.appendChild(checkedStar);
+  }
 
-          }
-        })
-      }
+  // Create Unchecked Stars
+  for (var uncheckedIndex = rating; uncheckedIndex < maxStars; uncheckedIndex++) {
+    var uncheckedStar = document.createElement('SPAN');
+    uncheckedStar.setAttribute('class', 'fa fa-star');
+    ratingDiv.appendChild(uncheckedStar);
+  }
+  return ratingDiv;
+}
 
-      function sendEmail() {
-        var emailInput = document.getElementById('inputEmail');
-        var phoneInput = document.getElementById('inputPhone');
-        var email = emailInput.value;
-        var phone = phoneInput.value;
-        $.ajax({
-          type: 'GET',
-          url: window.location.origin + '/emailrequest',
-          data: {
-            email: email,
-            phone: phone
-          },
-          contentType: 'application/json',
-          success: function (response) {
-            console.log("Reponse: " + JSON.stringify(response));
-          },
-          error: function (response) {
+function setReviewsCount(n) {
+  var btn = document.getElementById('reviews-display-btn');
+  if (n === 0) {
+    btn.innerHTML = "No Reviews."
+    return;
+  }
+  btn.innerHTML = 'Read all ' + n + ' reviews';
+}
 
-          }
-        })
-      }
+function displayAllReviews() {
+  $('#reviews-modal').modal();
+  $.ajax({
+    type: 'GET',
+    url: window.location.origin + '/reviews',
+    success: function (response) {
+    },
+    error: function (response) {
+
+    }
+  })
+}
+
+function sendEmail() {
+  var emailInput = document.getElementById('inputEmail');
+  var phoneInput = document.getElementById('inputPhone');
+  var email = emailInput.value;
+  var phone = phoneInput.value;
+  $.ajax({
+    type: 'GET',
+    url: window.location.origin + '/emailrequest',
+    data: {
+      email: email,
+      phone: phone
+    },
+    contentType: 'application/json',
+    success: function (response) {
+      console.log("Reponse: " + JSON.stringify(response));
+    },
+    error: function (response) {
+    }
+  })
+}

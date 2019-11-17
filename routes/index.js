@@ -13,15 +13,45 @@ var transporter = nodemailer.createTransport({
 	}
 });
 
+// firebase init
+/*
+var config = {
+  apiKey: "<API_KEY>",
+  authDomain: "<PROJECT_ID>.firebaseapp.com",
+  databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
+  storageBucket: "<BUCKET>.appspot.com",
+};*/
+firebase.initializeApp({
+  apiKey: 'AIzaSyAcVkAlPudoOqXwchD_aOu2mhXV_H-mRqY',
+  authDomain: 'lupitasfurniture-f583c.firebaseapp.com',
+  projectId: 'lupitasfurniture-f583c',
+  databaseURL: "https://lupitasfurniture-f583c.firebaseio.com"
+});
+
+var database = firebase.firestore();
+var reviews = database.collection('reviews');
+
 router.get('/', function (req, res, next) {
 	res.render('index', { title: 'Express' });
 });
 
-router.get('/get-reviews', function (req, res, next) {  
-	var reviewsRef = firebase.dateabase().ref('reviews');
+router.get('/get-reviews', function (req, res, next) {
+	reviews.get().then(snapshot => {
+		var obj = [];
+		snapshot.forEach(doc => {
+			var data = doc.data();
+			obj.push({
+				created: data.created,
+				name: data.name,
+				rating: data.rating,
+				review: data.review
+			});
+		});
+		res.send(obj);
+	});
 });
 
-router.post('/ratingsubmit', function (req, res, next) {
+router.get('/submit-review', function (req, res, next) {
 	if (typeof req === 'undefined') {
 		return
 	}
@@ -29,23 +59,22 @@ router.post('/ratingsubmit', function (req, res, next) {
 	var currentTime = new Date();
 	var name = req.query.name;
 	var rating = req.query.rating;
-	var comment = req.query.comment;
+	var review = req.query.review;
 	var ip = req.connection.remoteAddress;
 
 	if (isNaN(rating)) {
 		return
 	}
 
-	return;
-	var database = firebase.database();
-	var ref = database.ref('ratings');
-
-	ref.set({
+	console.log("Updating docs.");
+	reviews.doc(ip).set({
 		name: name,
 		rating: rating,
-		comment: comment,
-		ip: ip
+		review: review,
+		created: currentTime
 	});
+
+	res.send({success: true})
 
 });
 

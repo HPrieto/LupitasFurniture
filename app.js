@@ -3,7 +3,9 @@ var app = express();
 var path = require('path');
 var firebase = require('firebase');
 
-// Initialize Fireabse
+// Initialize Firebase
+
+/*
 var firebaseConfig = {
     apiKey: "AIzaSyAcVkAlPudoOqXwchD_aOu2mhXV_H-mRqY",
     authDomain: "lupitasfurniture-f583c.firebaseapp.com",
@@ -13,6 +15,7 @@ var firebaseConfig = {
     messagingSenderId: "75776435304"
 };
 firebase.initializeApp(firebaseConfig);
+*/
 
 // routes
 var indexRouter = require('./routes/index');
