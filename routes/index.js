@@ -41,7 +41,7 @@ router.get('/get-reviews', function (req, res, next) {
 		snapshot.forEach(doc => {
 			var data = doc.data();
 			obj.push({
-				created: data.created,
+				created: data.created.split('T')[0],
 				name: data.name,
 				rating: data.rating,
 				review: data.review
