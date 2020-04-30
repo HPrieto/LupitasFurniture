@@ -38,7 +38,7 @@
         "firebase-admin": "^8.7.0",
         "hjs": "0.0.6",
         "ip": "^1.1.5",
-        "jquery": "3.3.1",
+        "jquery": "3.5.0",
         "jquery.easing": "^1.4.1",
         "nodemailer": "^4.6.8"
     },
